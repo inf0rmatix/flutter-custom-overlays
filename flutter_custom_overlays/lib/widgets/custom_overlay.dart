@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -105,7 +104,7 @@ class CustomOverlayState extends State<CustomOverlay> {
             link: _layerLink,
             child: AnimatedContainer(
               duration: const Duration(milliseconds: 200),
-              constraints: widget.overlayConstraints,
+              constraints: constraints,
               decoration: const BoxDecoration(
                 color: Colors.black38,
                 // TODO
