@@ -36,9 +36,15 @@ class HomePage extends StatelessWidget {
                 ),
                 CustomOverlay(
                   key: cardOverlayKey,
-                  // alignment: Alignment.center,
+                  margin: const Size(8.0, 8.0),
                   overlay: Container(
-                    color: Colors.black12,
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.teal,
+                        width: 4,
+                      ),
+                      borderRadius: BorderRadius.circular(8.0),
+                    ),
                   ),
                   child: const BasicCard(
                     title: 'quo dolor et',

@@ -16,6 +16,10 @@ class CustomOverlay extends StatefulWidget {
 
   final FocusOnKeyCallback? onKey;
 
+  final bool ignorePointer;
+
+  final Size margin;
+
   const CustomOverlay({
     required this.overlay,
     required this.child,
@@ -25,6 +29,8 @@ class CustomOverlay extends StatefulWidget {
     this.hideOverlayWhenLoosingFocus = true,
     this.autofocus = true,
     this.onKey,
+    this.ignorePointer = true,
+    this.margin = Size.zero,
   });
 
   @override
@@ -94,32 +100,33 @@ class CustomOverlayState extends State<CustomOverlay> {
 
     _overlayEntry = OverlayEntry(
       builder: (context) => Positioned(
-        width: width,
-        height: height,
-        child: Theme(
-          data: theme,
-          child: CompositedTransformFollower(
-            showWhenUnlinked: false,
-            targetAnchor: alignment,
-            link: _layerLink,
-            child: AnimatedContainer(
-              duration: const Duration(milliseconds: 200),
-              constraints: constraints,
-              decoration: const BoxDecoration(
-                color: Colors.black38,
-                // TODO
-                // borderRadius: theme.radius.asBorderRadius().L,
-                // boxShadow: theme.elevation.flyout,
-              ),
-              clipBehavior: Clip.antiAlias,
-              child: FocusScope(
-                autofocus: widget.autofocus,
-                onKeyEvent: _handleKeyEvent,
-                node: _focusScopeNode,
-                onFocusChange: _onFocusChange,
-                onKey: widget.onKey,
-                child: FocusTraversalGroup(
-                  child: widget.overlay,
+        width: width + widget.margin.width,
+        height: height + widget.margin.height,
+        child: IgnorePointer(
+          ignoring: widget.ignorePointer,
+          child: Theme(
+            data: theme,
+            child: CompositedTransformFollower(
+              showWhenUnlinked: false,
+              targetAnchor: alignment,
+              link: _layerLink,
+              offset: Offset(-widget.margin.width / 2, -widget.margin.height / 2),
+              child: AnimatedContainer(
+                duration: const Duration(milliseconds: 200),
+                constraints: constraints,
+                decoration: const BoxDecoration(
+                    // TODO
+                    ),
+                clipBehavior: Clip.antiAlias,
+                child: FocusScope(
+                  autofocus: widget.autofocus,
+                  onKeyEvent: _handleKeyEvent,
+                  node: _focusScopeNode,
+                  onFocusChange: _onFocusChange,
+                  onKey: widget.onKey,
+                  child: FocusTraversalGroup(
+                    child: widget.overlay,
+                  ),
                 ),
               ),
             ),
