@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_custom_overlays/widgets/basic_card.dart';
 import 'package:flutter_custom_overlays/widgets/custom_overlay.dart';
 import 'package:flutter_custom_overlays/widgets/tutorial_card.dart';
+import 'package:flutter_custom_overlays/widgets/tutorial_indicator_overlay.dart';
 
 class HomePage extends StatelessWidget {
   final cardOverlayKey = GlobalKey<CustomOverlayState>();
@@ -28,28 +29,21 @@ class HomePage extends StatelessWidget {
               runSpacing: 8.0,
               children: [
                 const TutorialCard(),
-                BasicCard(
+                const BasicCard(
                   title: 'qui voluptas est',
                   subtitle: 'Photo by Anna Shvets @ Pexels.com',
                   imageName: 'assets/images/pexels-photo-4587979.jpeg',
-                  buttonOverlayKey: buttonOverlayKey,
                 ),
                 CustomOverlay(
                   key: cardOverlayKey,
-                  margin: const Size(8.0, 8.0),
-                  overlay: Container(
-                    decoration: BoxDecoration(
-                      border: Border.all(
-                        color: Colors.teal,
-                        width: 4,
-                      ),
-                      borderRadius: BorderRadius.circular(8.0),
-                    ),
-                  ),
-                  child: const BasicCard(
+                  margin: const Size(-8, -8),
+                  overlay: const TutorialIndicatorOverlay(),
+                  child: BasicCard(
                     title: 'quo dolor et',
                     subtitle: 'Photo by Anna Shvets @ Pexels.com',
                     imageName: 'assets/images/pexels-photo-4588014.jpeg',
+                    vote: () => cardOverlayKey.currentState?.showOverlay(),
+                    buttonOverlayKey: buttonOverlayKey,
                   ),
                 ),
                 const BasicCard(

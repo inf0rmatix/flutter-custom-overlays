@@ -100,8 +100,8 @@ class CustomOverlayState extends State<CustomOverlay> {
 
     _overlayEntry = OverlayEntry(
       builder: (context) => Positioned(
-        width: width + widget.margin.width,
-        height: height + widget.margin.height,
+        width: width + widget.margin.width.abs(),
+        height: height + widget.margin.height.abs(),
         child: IgnorePointer(
           ignoring: widget.ignorePointer,
           child: Theme(
@@ -110,7 +110,7 @@ class CustomOverlayState extends State<CustomOverlay> {
               showWhenUnlinked: false,
               targetAnchor: alignment,
               link: _layerLink,
-              offset: Offset(-widget.margin.width / 2, -widget.margin.height / 2),
+              offset: Offset(widget.margin.width / 2, widget.margin.height / 2),
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 200),
                 constraints: constraints,

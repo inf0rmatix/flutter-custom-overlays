@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_custom_overlays/widgets/custom_overlay.dart';
+import 'package:flutter_custom_overlays/widgets/tutorial_indicator_overlay.dart';
 
 class BasicCard extends StatelessWidget {
   final String imageName;
@@ -10,11 +11,14 @@ class BasicCard extends StatelessWidget {
 
   final GlobalKey<CustomOverlayState>? buttonOverlayKey;
 
+  final Function()? vote;
+
   const BasicCard({
     required this.imageName,
     required this.title,
     required this.subtitle,
     this.buttonOverlayKey,
+    this.vote,
     super.key,
   });
 
@@ -43,7 +47,7 @@ class BasicCard extends StatelessWidget {
             ),
             CustomOverlay(
               key: buttonOverlayKey,
-              overlay: Container(color: Colors.black12),
+              overlay: const TutorialIndicatorOverlay(),
               child: ButtonBar(
                 children: [
                   ElevatedButton.icon(
@@ -52,7 +56,7 @@ class BasicCard extends StatelessWidget {
                     label: const Text('Edit'),
                   ),
                   ElevatedButton.icon(
-                    onPressed: () {},
+                    onPressed: vote ?? () {},
                     icon: const Icon(Icons.sentiment_satisfied_rounded),
                     label: const Text('Vote'),
                   ),
