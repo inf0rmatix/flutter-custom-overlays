@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:step_by_step/steps/basic_overlay/basic_overlay_page.dart';
+import 'package:step_by_step/steps/complete_overlay/complete_overlay_page.dart';
 import 'package:step_by_step/steps/issue/issue_page.dart';
 import 'package:step_by_step/steps/overlay_only/overlay_only_page.dart';
 
@@ -15,7 +16,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    tabController = TabController(length: 3, vsync: this);
+    tabController = TabController(length: 4, vsync: this);
 
     super.initState();
   }
@@ -44,6 +45,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 Tab(
                   text: 'Basic',
                 ),
+                Tab(
+                  text: 'Complete',
+                ),
               ],
             ),
           ),
@@ -54,6 +58,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 const IssuePage(),
                 OverlayOnlyPage(),
                 BasicOverlayPage(),
+                CompleteOverlayPage(),
               ],
             ),
           ),

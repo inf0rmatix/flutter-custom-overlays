@@ -37,26 +37,17 @@ class BasicOverlayState extends State<BasicOverlay> {
       return;
     }
 
-    // Get the theme from the current context
-    final theme = Theme.of(context);
-
     _overlayEntry = OverlayEntry(
       // If not using a positioned widget, the overlay will simply stretch out across the whole viewport (window)
       builder: (context) => Positioned(
         top: 250,
         left: 275,
         right: 275,
-        // In the overlays' context, there will be no theme, so we have to pass it in ourself
-        child: Theme(
-          data: theme,
-          // When using Material Design, there needs to be a material underneath
-          // for many of the material widgets to be able to render correctly
-          child: Material(
-            // making the material itself transparent to be able to see through
-            // the overlay widget passed in might still cover the space if it wants to
-            color: Colors.transparent,
-            child: widget.overlay,
-          ),
+        child: Material(
+          // making the material itself transparent to be able to see through,
+          // the overlay widget passed in might still cover the space if it wants to
+          color: Colors.transparent,
+          child: widget.overlay,
         ),
       ),
     );
