@@ -1,11 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:step_by_step/steps/complete_overlay/complete_overlay.dart';
+import 'package:flutter_portal/flutter_portal.dart';
 
-class GoodBoy extends StatelessWidget {
-  final questionOverlayKey = GlobalKey<CompleteOverlayState>();
-  final treatOverlayKey = GlobalKey<CompleteOverlayState>();
+class PortalBoy extends StatefulWidget {
+  const PortalBoy({super.key});
 
-  GoodBoy({super.key});
+  @override
+  State<PortalBoy> createState() => _PortalBoyState();
+}
+
+class _PortalBoyState extends State<PortalBoy> {
+  var isOverlayVisible = false;
+
+  var isTreatVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -15,17 +21,22 @@ class GoodBoy extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         ElevatedButton(
-          onPressed: () => questionOverlayKey.currentState?.toggleOverlay(),
+          onPressed: () => setState(() => isTreatVisible = true),
           child: const Text('Who is a good boy?'),
         ),
         const SizedBox(height: 16.0),
-        CompleteOverlay(
-          key: questionOverlayKey,
-          offset: const Offset(16, -48),
-          overlay: _Overlay(
+        PortalTarget(
+          anchor: const Aligned(
+            follower: Alignment.center,
+            target: Alignment.center,
+          ),
+          visible: isTreatVisible,
+          portalFollower: _Overlay(
             onTap: () {
-              questionOverlayKey.currentState?.hideOverlay();
-              treatOverlayKey.currentState?.showOverlay();
+              setState(() {
+                isOverlayVisible = false;
+                isTreatVisible = true;
+              });
             },
           ),
           child: Container(
