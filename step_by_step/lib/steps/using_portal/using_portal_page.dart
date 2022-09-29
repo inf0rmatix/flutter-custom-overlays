@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_portal/flutter_portal.dart';
 import 'package:step_by_step/steps/using_portal/portal_boy.dart';
 
-class CompleteOverlayPage extends StatelessWidget {
-  const CompleteOverlayPage({super.key});
+class UsingPortalPage extends StatelessWidget {
+  const UsingPortalPage({super.key});
 
   @override
   Widget build(BuildContext context) {

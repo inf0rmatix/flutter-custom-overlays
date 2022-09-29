@@ -11,8 +11,6 @@ class PortalBoy extends StatefulWidget {
 class _PortalBoyState extends State<PortalBoy> {
   var isOverlayVisible = false;
 
-  var isTreatVisible = false;
-
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -21,7 +19,7 @@ class _PortalBoyState extends State<PortalBoy> {
       mainAxisSize: MainAxisSize.min,
       children: [
         ElevatedButton(
-          onPressed: () => setState(() => isTreatVisible = true),
+          onPressed: () => setState(() => isOverlayVisible = !isOverlayVisible),
           child: const Text('Who is a good boy?'),
         ),
         const SizedBox(height: 16.0),
@@ -29,16 +27,11 @@ class _PortalBoyState extends State<PortalBoy> {
           anchor: const Aligned(
             follower: Alignment.center,
             target: Alignment.center,
+            widthFactor: 1,
+            heightFactor: 1,
           ),
-          visible: isTreatVisible,
-          portalFollower: _Overlay(
-            onTap: () {
-              setState(() {
-                isOverlayVisible = false;
-                isTreatVisible = true;
-              });
-            },
-          ),
+          visible: isOverlayVisible,
+          portalFollower: const _Overlay(),
           child: Container(
             clipBehavior: Clip.antiAlias,
             decoration: BoxDecoration(
@@ -56,48 +49,23 @@ class _PortalBoyState extends State<PortalBoy> {
 }
 
 class _Overlay extends StatelessWidget {
-  final void Function() onTap;
-
-  const _Overlay({
-    super.key,
-    required this.onTap,
-  });
+  const _Overlay();
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      children: [
-        Material(
-          borderRadius: BorderRadius.circular(4.0),
-          color: Colors.white,
-          elevation: 4,
-          clipBehavior: Clip.antiAlias,
-          child: InkWell(
-            onTap: onTap,
-            child: const Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Center(
-                child: Text('Am good boy, gib treat plz'),
-              ),
+    return Center(
+      child: IntrinsicHeight(
+        child: IntrinsicWidth(
+          child: Container(
+            padding: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8),
+              color: Colors.white,
+            ),
+            child: const Center(
+              child: Text('Am good boy, gib treat plz'),
             ),
           ),
-        ),
-      ],
-    );
-  }
-}
-
-class _Treat extends StatelessWidget {
-  const _Treat({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return IgnorePointer(
-      child: Center(
-        child: Image.asset(
-          'assets/dog-treat.png',
-          width: 100,
         ),
       ),
     );
