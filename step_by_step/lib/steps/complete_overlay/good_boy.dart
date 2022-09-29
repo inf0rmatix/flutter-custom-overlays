@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:step_by_step/steps/complete_overlay/complete_overlay.dart';
+import 'package:flutter_portal/flutter_portal.dart';
 
-class GoodBoy extends StatelessWidget {
-  final questionOverlayKey = GlobalKey<CompleteOverlayState>();
-  final treatOverlayKey = GlobalKey<CompleteOverlayState>();
+class GoodBoy extends StatefulWidget {
+  // final questionOverlayKey = GlobalKey<CompleteOverlayState>();
+  // final treatOverlayKey = GlobalKey<CompleteOverlayState>();
 
   GoodBoy({super.key});
+
+  @override
+  State<GoodBoy> createState() => _GoodBoyState();
+}
+
+class _GoodBoyState extends State<GoodBoy> {
+  var isOverlayVisible = false;
+
+  var isTreatVisible = false;
 
   @override
   Widget build(BuildContext context) {
@@ -15,31 +24,37 @@ class GoodBoy extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         ElevatedButton(
-          onPressed: () => questionOverlayKey.currentState?.toggleOverlay(),
+          // onPressed: () => questionOverlayKey.currentState?.toggleOverlay(),
+          onPressed: () => setState(() => isTreatVisible = true),
           child: const Text('Who is a good boy?'),
         ),
         const SizedBox(height: 16.0),
-        CompleteOverlay(
-          key: treatOverlayKey,
-          overlay: const _Treat(),
-          child: CompleteOverlay(
-            key: questionOverlayKey,
-            offset: const Offset(16, -48),
-            overlay: _Overlay(
-              onTap: () {
-                questionOverlayKey.currentState?.hideOverlay();
-                treatOverlayKey.currentState?.showOverlay();
-              },
+        PortalTarget(
+          // key: questionOverlayKey,
+          // offset: const Offset(16, -48),
+          anchor: const Aligned(
+            follower: Alignment.center,
+            target: Alignment.center,
+          ),
+          visible: isTreatVisible,
+          portalFollower: _Overlay(
+            onTap: () {
+              // questionOverlayKey.currentState?.hideOverlay();
+              // treatOverlayKey.currentState?.showOverlay();
+              setState(() {
+                isOverlayVisible = false;
+                isTreatVisible = true;
+              });
+            },
+          ),
+          child: Container(
+            clipBehavior: Clip.antiAlias,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(8.0),
             ),
-            child: Container(
-              clipBehavior: Clip.antiAlias,
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8.0),
-              ),
-              child: Image.asset(
-                'assets/pexels-photo-4587979.jpeg',
-                width: 200,
-              ),
+            child: Image.asset(
+              'assets/pexels-photo-4587979.jpeg',
+              width: 200,
             ),
           ),
         ),

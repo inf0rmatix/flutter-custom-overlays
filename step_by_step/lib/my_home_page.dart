@@ -3,6 +3,7 @@ import 'package:step_by_step/steps/basic_overlay/basic_overlay_page.dart';
 import 'package:step_by_step/steps/complete_overlay/complete_overlay_page.dart';
 import 'package:step_by_step/steps/issue/issue_page.dart';
 import 'package:step_by_step/steps/overlay_only/overlay_only_page.dart';
+import 'package:step_by_step/steps/positioned_and_sized_overlay/positioned_and_sized_overlay_page.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
@@ -16,7 +17,7 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
 
   @override
   void initState() {
-    tabController = TabController(length: 4, vsync: this);
+    tabController = TabController(length: 5, vsync: this);
 
     super.initState();
   }
@@ -46,6 +47,9 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                   text: 'Basic',
                 ),
                 Tab(
+                  text: 'Positioned',
+                ),
+                Tab(
                   text: 'Complete',
                 ),
               ],
@@ -58,7 +62,8 @@ class _MyHomePageState extends State<MyHomePage> with TickerProviderStateMixin {
                 const IssuePage(),
                 OverlayOnlyPage(),
                 BasicOverlayPage(),
-                CompleteOverlayPage(),
+                PositionedAndSizedOverlayPage(),
+                const CompleteOverlayPage(),
               ],
             ),
           ),
