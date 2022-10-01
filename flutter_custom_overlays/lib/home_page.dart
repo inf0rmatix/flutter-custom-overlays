@@ -16,6 +16,13 @@ class _HomePageState extends State<HomePage> {
   var isCardActionTutorialVisible = false;
 
   @override
+  void initState() {
+    super.initState();
+
+    _showInitialInformation();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -86,6 +93,44 @@ class _HomePageState extends State<HomePage> {
 
     setState(() {
       isCardActionTutorialVisible = false;
+    });
+  }
+
+  void _showInitialInformation() {
+    WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      showDialog(
+        context: context,
+        builder: (context) => Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 300),
+            child: Card(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const ListTile(
+                    title: Text('Welcome to this example!'),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      'Press the floating action button on the bottom right to show a few tutorial indicators.',
+                    ),
+                  ),
+                  ButtonBar(
+                    children: [
+                      TextButton.icon(
+                        onPressed: () => Navigator.pop(context),
+                        icon: const Icon(Icons.done),
+                        label: const Text('Ok'),
+                      ),
+                    ],
+                  )
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
     });
   }
 }

@@ -17,7 +17,7 @@ class TutorialIndicatorOverlay extends StatelessWidget {
                   color: Colors.teal,
                   width: 4,
                 ),
-                borderRadius: BorderRadius.circular(8.0),
+                borderRadius: BorderRadius.circular(16.0),
               ),
             ),
           );
