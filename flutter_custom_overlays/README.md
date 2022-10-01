@@ -1,16 +1,14 @@
-# flutter_custom_overlays
+# 🪄 Custom Overlays in Flutter
 
-A new Flutter project.
+This project is to show how you could use [flutter_portal](https://pub.dev/packages/flutter_portal) to implement custom overlays in your app. 
 
-## Getting Started
+To give the example a more life-like look and feel, I created some very basic widgets.
 
-This project is a starting point for a Flutter application.
+[Basic Card](lib/widgets/basic_card.dart) is a simple composition of default Flutter widgets, which also has a [PortalTarget](https://pub.dev/documentation/flutter_portal/latest/flutter_portal/PortalTarget-class.html) that can be used to display a [TutorialIndicatorOverlay](lib/widgets/tutorial_indicator_overlay.dart) widget around the button bar.
 
-A few resources to get you started if this is your first Flutter project:
+To get started, I recommend you the check out the project and run it. Than take a look into the code and comprehend what happens and why.
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+If any questions arise or you'd like to see more examples, please [create an issue](https://github.com/inf0rmatix/flutter-custom-overlays/issues/new/choose).
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+![Screenshot of the example app](screenshot.png)
