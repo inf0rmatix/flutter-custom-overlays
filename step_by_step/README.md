@@ -1,16 +1,11 @@
-# step_by_step
+# 🚶 Understanding overlays in Flutter, step by step.
 
-A new Flutter project.
+This project accompanies my [talk on custom overlays in Flutter](https://youtu.be/bljfDlnQS9w?t=4719).
+It's aim is to gradually deepen the understanding of how to use [Overlay](https://api.flutter.dev/flutter/widgets/Overlay-class.html) and displaying your own overlays with the help of [OverlayEntry](https://api.flutter.dev/flutter/widgets/OverlayEntry-class.html).
 
-## Getting Started
+I recommend you to start left to right, following the order of the tabs in this application.
+You'd want to have a good understanding of the code, what happens and why, before proceeding to the next step.
 
-This project is a starting point for a Flutter application.
+![screenshot of the app](screenshot.png)
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
