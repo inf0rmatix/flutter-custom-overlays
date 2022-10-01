@@ -5,13 +5,23 @@ class TutorialIndicatorOverlay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        border: Border.all(
-          color: Colors.teal,
-          width: 4,
-        ),
-        borderRadius: BorderRadius.circular(8.0),
+    return IgnorePointer(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return OverflowBox(
+            maxHeight: constraints.biggest.height + 8,
+            maxWidth: constraints.biggest.width + 8,
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.teal,
+                  width: 4,
+                ),
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+            ),
+          );
+        },
       ),
     );
   }

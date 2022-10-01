@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_custom_overlays/widgets/custom_overlay.dart';
 import 'package:flutter_custom_overlays/widgets/tutorial_indicator_overlay.dart';
+import 'package:flutter_portal/flutter_portal.dart';
 
 class BasicCard extends StatelessWidget {
   final String imageName;
@@ -9,15 +9,15 @@ class BasicCard extends StatelessWidget {
 
   final String subtitle;
 
-  final GlobalKey<CustomOverlayState>? buttonOverlayKey;
-
   final Function()? vote;
+
+  final bool isTutorialIndicatorVisible;
 
   const BasicCard({
     required this.imageName,
     required this.title,
     required this.subtitle,
-    this.buttonOverlayKey,
+    this.isTutorialIndicatorVisible = false,
     this.vote,
     super.key,
   });
@@ -45,9 +45,15 @@ class BasicCard extends StatelessWidget {
               child: Text(
                   'Nesciunt suscipit qui ab eaque quod sint qui quia eaque. Nihil et sint voluptas. Aut dolor molestiae praesentium corporis explicabo. Voluptas veniam voluptas aspernatur. Fugit qui harum consequatur alias.'),
             ),
-            CustomOverlay(
-              key: buttonOverlayKey,
-              overlay: const TutorialIndicatorOverlay(),
+            PortalTarget(
+              anchor: const Aligned(
+                follower: Alignment.center,
+                target: Alignment.center,
+                heightFactor: 1,
+                widthFactor: 1,
+              ),
+              visible: isTutorialIndicatorVisible,
+              portalFollower: const TutorialIndicatorOverlay(),
               child: ButtonBar(
                 children: [
                   ElevatedButton.icon(
