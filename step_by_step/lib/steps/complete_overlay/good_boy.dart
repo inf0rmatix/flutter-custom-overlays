@@ -28,14 +28,20 @@ class GoodBoy extends StatelessWidget {
               treatOverlayKey.currentState?.showOverlay();
             },
           ),
-          child: Container(
-            clipBehavior: Clip.antiAlias,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8.0),
+          child: CompleteOverlay(
+            key: treatOverlayKey,
+            overlay: _Treat(
+              onTap: () => treatOverlayKey.currentState?.hideOverlay(),
             ),
-            child: Image.asset(
-              'assets/pexels-photo-4587979.jpeg',
-              width: 200,
+            child: Container(
+              clipBehavior: Clip.antiAlias,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: Image.asset(
+                'assets/pexels-photo-4587979.jpeg',
+                width: 200,
+              ),
             ),
           ),
         ),
@@ -48,7 +54,6 @@ class _Overlay extends StatelessWidget {
   final void Function() onTap;
 
   const _Overlay({
-    super.key,
     required this.onTap,
   });
 
@@ -67,7 +72,7 @@ class _Overlay extends StatelessWidget {
             child: const Padding(
               padding: EdgeInsets.all(8.0),
               child: Center(
-                child: Text('Am good boy, gib treat plz'),
+                child: Text('Am good boy, gib treat plz\n\nTap to give a treat to this goodest of boys.'),
               ),
             ),
           ),
@@ -78,12 +83,17 @@ class _Overlay extends StatelessWidget {
 }
 
 class _Treat extends StatelessWidget {
-  const _Treat({super.key});
+  final void Function() onTap;
+
+  const _Treat({
+    required this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return IgnorePointer(
-      child: Center(
+    return Center(
+      child: InkWell(
+        onTap: onTap,
         child: Image.asset(
           'assets/dog-treat.png',
           width: 100,
